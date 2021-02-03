@@ -6,7 +6,7 @@ public class Tree {
         BinaryTree<Integer> tree = new BinaryTree<>();
 
         initTree(tree);
-        tree.preOrder(tree.root);
+        tree.prinfLeftView();
         System.out.println();
 
 

@@ -6,8 +6,8 @@ public class Tree {
         BinaryTree<Integer> tree = new BinaryTree<>();
 
         initTree(tree);
-        tree.printPerimeter();
-        System.out.println("");
+        tree.preOrder(tree.root);
+        System.out.println();
 
 
     }

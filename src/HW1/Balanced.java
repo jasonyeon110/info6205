@@ -1,8 +1,6 @@
-package HW1.Balance;
+package HW1;
 
 public class Balanced {
-
-    public TreeNode root;
 
     public boolean isBalanced(TreeNode root){
         return MaxHeight(root) != null;

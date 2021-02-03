@@ -1,4 +1,4 @@
-package HW1.Balance;
+package HW1;
 
 public class TreeNode {
     int val;

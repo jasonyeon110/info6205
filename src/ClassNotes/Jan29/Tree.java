@@ -1,4 +1,4 @@
-package ClassNotes;
+package ClassNotes.Jan29;
 
 public class Tree {
 

@@ -1,4 +1,4 @@
-package ClassNotes;
+package ClassNotes.Jan29;
 
 import java.util.LinkedList;
 import java.util.Queue;

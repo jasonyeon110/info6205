@@ -18,15 +18,7 @@ public class Main {
         list.addTail(2);
         list.addTail(3);
         list.addTail(4);
-        list.addTail(5);
-        list.addTail(6);
-        list.addTail(7);
-        list.addTail(8);
-        list.addTail(9);
-        list.addTail(10);
-        list.addTail(11);
-        list.addTail(12);
-        list.addTail(13);
+
         //node 5
         Node<Integer> startPoint = list.head.next.next.next.next;
 

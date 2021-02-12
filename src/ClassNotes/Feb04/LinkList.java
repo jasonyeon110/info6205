@@ -246,6 +246,48 @@ public class LinkList <T>{
     }
 
 
+    public void rotateList(int k){
+        k = k % size();
+        if(k <= 0 || head == null || head.next == null){
+            return;
+        }
+
+        Node<T> secondHalf = findKthFromEnd(k + 1);
+        Node<T> firstHalf = secondHalf.next;
+
+        secondHalf.next = null;
+
+        Node<T> temp = firstHalf;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = head;
+        head = firstHalf;
+    }
+
+    public void removeDuplicates(){
+        if(head == null || head.next == null){
+            return;
+        }
+
+        Node<T> temp = head;
+        while (temp.next != null){
+            while (temp.next != null && temp.next.data == temp.data){
+                temp.next = temp.next.next;
+            }
+
+            temp = temp.next;
+
+            if(temp == null){
+                break;
+            }
+        }
+    }
+
+
+
+
+
 
 }
 

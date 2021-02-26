@@ -1,4 +1,6 @@
-package ClassNotes.Feb18_SearchAndSort;
+package ClassNotes.Feb18_SearchAndSort_Feb25;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,16 +8,20 @@ public class Main {
         int[] arr2 = {5,1,3,2,2,2,1,2,7,7,7,9,11,1,3,4,4,4,2,6};
         int[] arr3 = {1,2,0,0,2,2,1,1,0,0,1,2,0,1};
         int[] arr4 = {1,5,5,3,2,5,5,5,0,5};
-
+        int[] arr5 = {7,3,-2,8,5,6};
+        int[] arr6 = {-1,-1,0,1,1,1,2,2,2,3,3,3,6,6,7,7,7,7,8,9,9};
 //        bubbleSort(arr);
 //        selectionSort(arr);
 //        mergeSort(arr);
 //        quickSort(arr);
-//        findNthLargest(arr, 2);
+//        findNthLargest(arr5, 2);
+//        System.out.println(findNthSmallest(arr5,2));
 //        countSort(arr2, 12);
 //        dutchFlag(arr3, 1);
 //        printArray(arr3);
-        System.out.println(majorityElement(arr4));
+//        System.out.println(majorityElement(arr4));
+//        sortArrayWaveForm(arr5);
+//        System.out.println(getFirstIndex(arr2, 1));
     }
 
     private static void printArray(int[] arr){
@@ -179,6 +185,13 @@ public class Main {
         }
     }
 
+    public static int findNthSmallest(int[] arr, int n){
+        Arrays.sort(arr);
+        return arr[n - 1];
+    }
+
+
+
     public static void countSort(int[] arr, int RANGE){
         int[] count = new int[RANGE];
 
@@ -254,6 +267,166 @@ public class Main {
         }
         return majorityCandidate;
     }
+
+    //complexity = nLon(n)
+    private static void sortArrayWaveForm(int[] arr){
+        if(arr == null || arr.length <=1 ){
+            return;
+        }
+        //sort the array
+        Arrays.sort(arr);
+
+        for (int i = 0; i < arr.length - 1; i = i + 2) {
+            swap(arr, i, i + 1);
+        }
+        printArray(arr);
+    }
+
+    //complexity O(n)
+    private static void sortArrayWaveFormOn(int[] arr){
+        for (int i = 0; i < arr.length; i = i + 2) {
+
+            if(i > 0 && arr[i - 1] > arr[i]){
+                swap(arr, i-1, i);
+            }
+
+            if(i < arr.length -1 && arr[i] < arr[i + 1] ){
+                swap(arr, i, i + 1);
+            }
+        }
+        printArray(arr);
+    }
+
+    //binary search
+    //O(log(n))
+    private static boolean binSearch(int[] arr, int x){
+        if(arr == null){
+            return false;
+        }
+
+        int low = 0;
+        int high = arr.length -1;
+
+        while (low <= high){
+            int mid = (low + high)/2;
+            if(arr[mid] > x){
+                high = mid - 1;
+            }else if (arr[mid] < x){
+                low = mid + 1;
+            }else{
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    //recursive
+    public static boolean binSearchRecursive(int[] arr, int x){
+        if(arr == null){
+            return false;
+        }
+        return binSearchRecursive(arr, x, 0, arr.length-1);
+    }
+
+    //wrapper function
+    private static boolean binSearchRecursive(int[] arr, int x, int low, int high){
+        if(low > high){
+            return false;
+        }
+        int mid = (low + high)/2;
+
+        if(arr[mid] < x){
+            return binSearchRecursive(arr, x, mid + 1, high);
+        }else if(arr[mid] > x){
+            return binSearchRecursive(arr, x, low, mid - 1);
+        }
+        return true;
+    }
+
+    public static int getNumberOfOccurances(int[] arr, int x){
+        return getNumberOfOccurances(arr, x, 0, arr.length -1 );
+    }
+
+    private static int getNumberOfOccurances(int[] arr, int x, int low, int high){
+        if(low > high){
+            return 0;
+        }
+        if(arr[high] < x){
+            return 0;
+        }
+        if(arr[low] > x){
+            return 0;
+        }
+
+        if(arr[low] == x && arr[high] == x){
+            return high - low + 1;
+        }
+
+        int mid = (low + high)/2;
+
+        if(arr[mid] < x){
+            return getNumberOfOccurances(arr, x, mid + 1, high);
+        }else if(arr[mid] > x){
+            return getNumberOfOccurances(arr, x, low, mid -1);
+        }else{
+            return 1 + getNumberOfOccurances(arr, x, low, mid - 1) +
+                    getNumberOfOccurances(arr, x, mid + 1, high);
+        }
+
+    }
+
+    public static int getFirstIndex(int[] arr, int x){
+        return getFirstIndex(arr, x, 0 , arr.length - 1);
+    }
+
+    private static int getFirstIndex(int[] arr, int x, int low, int high){
+        if(low > high || arr[low] > x || arr[high] < x){
+            return -1;
+        }
+        if(arr[low] == x){
+            return low;
+        }
+
+        int mid = (low + high)/2;
+
+        if(arr[mid] < x){
+            return getFirstIndex(arr, x, mid + 1, high);
+        }else if(arr[mid] > x){
+            return getFirstIndex(arr, x, low, mid - 1);
+        }else{
+            return getFirstIndex(arr, x, low, mid);
+        }
+
+    }
+
+//    public static int getLastIndex(int[] arr, int x){
+//        return getLastIndex(arr, x, 0, )
+//    }
+//
+//    private static int getLastIndex(int[] arr, int x, int low, int high){
+//        if(low > high || arr[low] > x || arr[high] < x){
+//            return -1;
+//        }
+//        if(arr[high] == x){
+//            return high;
+//        }
+//
+//        int mid = (low + high)/2;
+//
+//        if(arr[mid] < x){
+//            return getFirstIndex(arr, x, mid + 1, high);
+//        }else if(arr[mid] > x){
+//            return getFirstIndex(arr, x, low, mid - 1);
+//        }else{
+//            return getFirstIndex(arr, x, mid, high-1);
+//        }
+//    }
+
+
+
+
+
 
 
 }

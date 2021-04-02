@@ -3,7 +3,7 @@ package MidTerm1;
 public class Problem4 {
     //[2,4,4,4,6,7,7,7,8,9,9,9,] & x = 7 , the result should be 5.
     public static int getIndex(int[] nums, int x){
-        return getIndex(nums, 0, nums.length, -1);
+        return getIndex(nums, x,0, nums.length-1);
     }
 
     public static int getIndex(int[] nums, int x, int low, int high){
@@ -28,7 +28,7 @@ public class Problem4 {
 
     public static void main(String[] args) {
         int[] test = {2,4,4,4,6,7,7,7,8,9,9,9};
-        getIndex(test, 7);
+        System.out.println(getIndex(test, 7));
     }
 
     /**
